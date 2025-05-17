@@ -41,6 +41,9 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
+    --color-bg: #141414;
+    --color-text: #ffffff;
+
     --color-red-45: #e50000;
     --color-red-50: #ff0000;
     --color-red-55: #ff1919;
@@ -67,6 +70,5 @@
     --color-gray-95: #f1f1f3;
     --color-gray-97: #f7f7f8;
     --color-gray-98: #fcfcfd;
-
   }
 }
