@@ -2,11 +2,11 @@ import './App.scss'
 
 function App() {
 
-  return (
-    <>
-      <div>Hello World!!!!!!!!!!!!!!!</div>
-    </>
-  )
+    return (
+        <div className="App">
+            123
+        </div>
+    )
 }
 
 export default App
