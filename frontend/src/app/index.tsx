@@ -1,9 +1,8 @@
-import {createRoot} from 'react-dom/client'
+import { createRoot } from 'react-dom/client'
 import './index.scss'
-import App from './App.tsx'
+import App from './App'
+import './config/i18n'
 
-createRoot(document.getElementById('root')!).render(
-    // <StrictMode>
-    <App/>
-    // </StrictMode>
-)
+const app = <App />
+createRoot(document.getElementById('root')!).render(app)
+
