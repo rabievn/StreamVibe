@@ -2,16 +2,8 @@ import { createBrowserRouter, RouterProvider, Navigate, Outlet } from 'react-rou
 import { Login } from '../../pages/Login'
 import { NotFound } from '../../pages/NotFoundPage'
 
-// import { HomePage } from './pages/HomePage'
-// import { LoginPage } from './pages/LoginPage'
-// import { VideoPage } from './pages/VideoPage'
-// import { BrowsePage } from './pages/BrowsePage'
-// import { FavoritesPage } from './pages/FavoritesPage'
-// import { ProfilePage } from './pages/ProfilePage'
-// import { NotFoundPage } from './pages/NotFoundPage'
-
 function PrivateRoutes() {
-  const isAuthenticated = true
+  const isAuthenticated = false
   return isAuthenticated ? <Outlet /> : <Navigate to="/login" />
 }
 
@@ -26,32 +18,16 @@ const publicRoutes = [
   }
 ]
 
-// Приватные маршруты (только для авторизованных пользователей)
 const privateRoutes = [
-  // {
-  //   path: '/',
-  //   element: <HomePage />
-  // },
-  // {
-  //   path: '/browse',
-  //   element: <BrowsePage />
-  // },
-  // {
-  //   path: '/video/:id',
-  //   element: <VideoPage />
-  // },
-  // {
-  //   path: '/favorites',
-  //   element: <FavoritesPage />
-  // },
-  // {
-  //   path: '/profile',
-  //   element: <ProfilePage />
-  // }
+  {
+    path: '/',
+    element: <div>123</div>
+  }
 ]
 
 const router = createBrowserRouter([
   {
+    path: '/',
     element: <PrivateRoutes />,
     children: privateRoutes
   },
