@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider, Navigate, Outlet } from 'react-router-dom'
-import { Login } from '../../pages/Login'
-import { NotFound } from '../../pages/NotFoundPage'
+import { Login } from '../../pages/Login/Login'
+import { NotFound } from '../../pages/NotFoundPage/NotFoundPage'
 
 function PrivateRoutes() {
   const isAuthenticated = false
