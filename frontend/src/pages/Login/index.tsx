@@ -1,10 +1,14 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 
 export const Login = () => {
+  const { t } = useTranslation()
+
+
   return (
     <div>
-      IT'S LOGIN YOU SON OF A BITCH
+      <p>{t('welcome')}</p>
+
     </div>
   )
 }
-
