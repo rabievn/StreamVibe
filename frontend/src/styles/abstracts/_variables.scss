@@ -1,6 +1,17 @@
 :root {
   --color-white: #fff;
   --color-black: #000;
+
+  --container-width: 1600px;
+
+  --border-radius-lg: 14px;
+  --border-radius-md: 12px;
+  --border-radius-sm: 10px;
+  --border-radius-xsm: 8px;
+
+  --media-desktop-size: 1920px;
+  --media-laptop-size: 1440px;
+  --media-mobile-size: 390px;
 }
 
 @media (prefers-color-scheme: light) {
@@ -40,6 +51,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --color-bg: #141414;
+    --second-bg: #0F0F0F;
     --color-text: #ffffff;
 
     --color-red-45: #e50000;
