@@ -29,7 +29,8 @@
   opacity: 0.8;
   border: 1px solid var(--color-gray-15);
   padding: 31px 33px 44px 33px;
-  border-radius: var(--border-radius-lg);
+  border-radius: var(--border-radius-xlg);
+  width: 100%;
 
   .loginFormHeader {
 
@@ -39,4 +40,12 @@
     font-size: var(--font-size-xlg);
     font-weight: var(--font-weight-bold);
   }
+
+  .loginFormInputsBlock {
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    gap: 30px;
+  }
+
 }

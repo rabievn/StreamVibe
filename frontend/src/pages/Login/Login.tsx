@@ -1,7 +1,7 @@
-import React from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from './Login.module.scss'
 import { StreamVibeIcon } from '../../assets/icons'
+import { Input } from '../../shared/ui/Input/Input'
 
 export const Login = () => {
   const { t } = useTranslation()
@@ -16,6 +16,10 @@ export const Login = () => {
         <div className={styles.loginForm}>
           <div className={styles.loginFormHeader}>
             <div className={styles.loginFormHeaderTitle}>{t('login')}</div>
+          </div>
+          <div className={styles.loginFormInputsBlock}>
+            <Input type="text" placeholder={t('email')} />
+            <Input type="password" placeholder={t('password')} />
           </div>
         </div>
       </div>

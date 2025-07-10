@@ -1,11 +1,14 @@
-import React from 'react'
-import './Input.module.scss'
+import styles from './Input.module.scss'
 
-export const Input = () => {
+type InputProps = {
+  placeholder?: string
+  type: 'text' | 'password' | 'email'
+}
+
+export const Input: React.FC<InputProps> = ({ placeholder, type }) => {
+
   return (
-    <div>
-      Input
-    </div>
+    <input type={type} className={styles.input} placeholder={placeholder} />
   )
 }
 

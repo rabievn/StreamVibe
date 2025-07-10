@@ -1,6 +1,7 @@
 {
   "welcome": "Добро пожаловать в StreamVibe",
   "login": "Войти",
+  "userNamePlaceholder": "Email или никнейм",
   "logout": "Выйти",
   "signup": "Зарегистрироваться",
   "username": "Имя пользователя",
