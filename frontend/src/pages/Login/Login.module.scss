@@ -37,15 +37,26 @@
   }
 
   .loginFormHeaderTitle {
-    font-size: var(--font-size-xlg);
+    font-size: var(--font-size-xxlg);
     font-weight: var(--font-weight-bold);
   }
 
-  .loginFormInputsBlock {
+  .loginFormInputs {
     display: flex;
     flex-direction: column;
     margin-top: 50px;
     gap: 30px;
+  }
+
+  .loginFormEnter {
+    margin-top: 30px;
+
+    span {
+      display: flex;
+      justify-content: center;
+      font-size: var(--font-size-xlg);
+      margin-block: 15px;
+    }
   }
 
 }
