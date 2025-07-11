@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider, Navigate, Outlet } from 'react-router-dom'
 import { Login } from '../../pages/Login/Login'
 import { NotFound } from '../../pages/NotFoundPage/NotFoundPage'
+import { SignUp } from '../../pages/SignUp/SignUp'
 
 function PrivateRoutes() {
   const isAuthenticated = false
@@ -11,6 +12,10 @@ const publicRoutes = [
   {
     path: '/login',
     element: <Login />
+  },
+  {
+    path: '/register',
+    element: <SignUp />
   },
   {
     path: '*',

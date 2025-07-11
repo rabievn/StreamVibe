@@ -1,29 +1,4 @@
-.login {
-  width: 100%;
-  height: 100%;
-
-  .loginContainer {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    max-width: var(--container-width);
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .loginHeader {
-    position: absolute;
-    top: 33px;
-    left: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-  }
-}
-
-.loginForm {
+.authForm {
   max-width: 480px;
   background: var(--second-bg);
   opacity: 0.8;
@@ -32,23 +7,23 @@
   border-radius: var(--border-radius-xlg);
   width: 100%;
 
-  .loginFormHeader {
+  .authFormHeader {
 
   }
 
-  .loginFormHeaderTitle {
+  .authFormHeaderTitle {
     font-size: var(--font-size-xxlg);
     font-weight: var(--font-weight-bold);
   }
 
-  .loginFormInputs {
+  .authFormInputs {
     display: flex;
     flex-direction: column;
     margin-top: 30px;
     gap: 30px;
   }
 
-  .loginFormEnter {
+  .authFormEnter {
     margin-top: 30px;
 
     span {
@@ -59,7 +34,7 @@
     }
   }
 
-  .loginFormRememberMe {
+  .authFormRememberMe {
     display: flex;
     align-items: center;
     gap: 8px;
