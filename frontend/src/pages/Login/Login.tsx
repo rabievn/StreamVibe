@@ -3,6 +3,8 @@ import styles from './Login.module.scss'
 import { StreamVibeIcon } from '../../assets/icons'
 import { Input } from '../../shared/ui/Input/Input'
 import { Button } from '../../shared/ui/Button/Button'
+import { Checkbox } from '../../shared/ui/Checkbox/Checkbox'
+import { SchemeButton } from '../../shared/ui/SchemeButton/SchemeButton'
 
 export const Login = () => {
   const { t } = useTranslation()
@@ -12,7 +14,9 @@ export const Login = () => {
       <div className={styles.loginContainer}>
         <div className={styles.loginHeader}>
           <StreamVibeIcon />
-          <div>123123213</div>
+          <div className={styles.loginHeaderScheme}>
+            <SchemeButton />
+          </div>
         </div>
         <div className={styles.loginForm}>
           <div className={styles.loginFormHeader}>
@@ -29,6 +33,11 @@ export const Login = () => {
             <Button onClick={() => {
             }} color="gray">{t('signup')}</Button>
           </div>
+          <div className={styles.loginFormRememberMe}>
+            <Checkbox />
+            {t('rememberMe')}
+          </div>
+          <span className={styles.captchaText}>{t('captchaText')}</span>
         </div>
       </div>
     </div>
