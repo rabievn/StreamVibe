@@ -32,9 +32,8 @@
   },
   "include": [
     "src/**/*",
-    "src/**/*",
     "global.d.ts",
     "vite.config.ts",
-    "scripts/**/*"
+    "scripts/**/*",
   ]
 }

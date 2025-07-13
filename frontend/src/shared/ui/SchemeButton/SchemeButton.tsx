@@ -1,5 +1,5 @@
-import { MoonIcon, SunIcon } from '../../../assets/icons'
 import styles from './SchemeButton.module.scss'
+import { MoonIcon, SunIcon } from '../../../assets/icons'
 
 export const SchemeButton = () => {
   return (

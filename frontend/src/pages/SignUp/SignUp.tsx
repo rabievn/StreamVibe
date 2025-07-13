@@ -4,9 +4,11 @@ import { Button } from '../../shared/ui/Button/Button'
 import { useTranslation } from 'react-i18next'
 import styles from '../Login/Login.module.scss'
 import { Checkbox } from '../../shared/ui/Checkbox/Checkbox'
+import { useNavigate } from 'react-router-dom'
 
 export const SignUp = () => {
   const { t } = useTranslation()
+  const navigate = useNavigate()
 
   return (
     <AuthLayout>
@@ -19,8 +21,7 @@ export const SignUp = () => {
           <Input type="password" placeholder={t('password')} />
         </div>
         <div className={styles.authFormEnter}>
-          <Button onClick={() => {
-          }} color="red">{t('signup')}</Button>
+          <Button onClick={() => navigate('./home')} color="red">{t('signup')}</Button>
         </div>
         <div className={styles.authFormRememberMe}>
           <Checkbox />

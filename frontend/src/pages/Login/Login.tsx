@@ -21,8 +21,7 @@ export const Login = () => {
           <Input type="password" placeholder={t('password')} />
         </div>
         <div className={styles.authFormEnter}>
-          <Button onClick={() => {
-          }} color="red">{t('login')}</Button>
+          <Button onClick={() => navigate('./home')} color="red">{t('login')}</Button>
           <span>{t('or')}</span>
           <Button onClick={() => navigate('../register')} color="gray">{t('signup')}</Button>
         </div>
