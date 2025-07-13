@@ -1,10 +1,11 @@
 import { createBrowserRouter, RouterProvider, Navigate, Outlet } from 'react-router-dom'
-import { Login } from '../../pages/Login/Login'
+import { Login } from '../../pages/Auth/Login/Login'
 import { NotFound } from '../../pages/NotFoundPage/NotFoundPage'
-import { SignUp } from '../../pages/SignUp/SignUp'
+import { SignUp } from '../../pages/Auth/SignUp/SignUp'
+import { Home } from '../../pages/Home/ui/Home'
 
 function PrivateRoutes() {
-  const isAuthenticated = false
+  const isAuthenticated = true
   return isAuthenticated ? <Outlet /> : <Navigate to="/login" />
 }
 
@@ -26,7 +27,7 @@ const publicRoutes = [
 const privateRoutes = [
   {
     path: '/',
-    element: <div>123</div>
+    element: <Home />
   }
 ]
 

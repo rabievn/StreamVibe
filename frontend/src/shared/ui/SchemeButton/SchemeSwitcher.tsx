@@ -1,7 +1,7 @@
-import styles from './SchemeButton.module.scss'
+import styles from './SchemeSwitcher.module.scss'
 import { MoonIcon, SunIcon } from '../../../assets/icons'
 
-export const SchemeButton = () => {
+export const SchemeSwitcher = () => {
   return (
     <div className={`${styles.schemeButton}`}>
       <button><SunIcon /></button>

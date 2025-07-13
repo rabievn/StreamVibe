@@ -1,9 +1,14 @@
+// types/i18next.d.ts
 import 'i18next'
 import { resources } from '../app/config/i18n'
 
+type DefaultResources = typeof resources['en']['translation']
+
 declare module 'i18next' {
   interface CustomTypeOptions {
-    resources: typeof resources['en']; // или ru, если основной язык ru
-    defaultNS: 'translation';
+    resources: {
+      translation: DefaultResources
+    }
+    defaultNS: 'translation'
   }
 }
