@@ -1,7 +1,7 @@
 export const Home = () => {
   return (
     <div>
-      FUCK OFF
+      HOME
     </div>
   )
 }
