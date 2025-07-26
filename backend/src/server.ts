@@ -5,7 +5,8 @@ import mongoose from 'mongoose'
 
 dotenv.config()
 
-mongoose.connect(config.dbUri)
+mongoose
+  .connect(config.dbUri)
   .then(() => {
     app.listen(config.port, () => {
       console.log(`Server started on port ${config.port}`)
