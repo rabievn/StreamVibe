@@ -1,0 +1,16 @@
+.schemeButton {
+  display: flex;
+  border: 1px solid var(--color-text);
+  border-radius: var(--border-radius-md);
+
+  button {
+    &:first-child {
+      padding: 7px 8px 7px 7px;
+      border-right: 1px solid var(--color-text);
+    }
+
+    &:last-child {
+      padding: 7px 7px 7px 8px;
+    }
+  }
+}
