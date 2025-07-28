@@ -1,10 +1,10 @@
-import UserModel from '../models/user.js'
+import UserModel from '../models/user-model.js'
 
 export const getUserById = async (userId: string) => {
-  const user = await UserModel.findById(userId)
+    const user = await UserModel.findById(userId)
 
-  if (!user) return null
+    if (!user) return null
 
-  const { passwordHash, ...userData } = user.toObject()
-  return userData
+    const {password, ...userData} = user.toObject()
+    return userData
 }
