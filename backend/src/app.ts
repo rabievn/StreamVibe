@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express'
 import cors from 'cors'
 import { UserController } from './controllers/index.js'
-import { checkAuth } from './middleware/UserValidations.js'
+import { checkAuth } from './middleware/user-validation.js'
 
 const app = express()
 

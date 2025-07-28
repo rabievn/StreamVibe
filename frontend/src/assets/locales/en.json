@@ -1,8 +1,8 @@
 {
   "welcome": "Welcome to StreamVibe",
-  "login": "Login",
+  "signIn": "Login",
   "email": "Email or username",
-  "logout": "Logout",
+  "signOut": "Logout",
   "signup": "Sign Up",
   "signupTitle": "Sign up",
   "or": "or",

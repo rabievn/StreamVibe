@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { getUserById } from '../services/UserService.js'
+import { getUserById } from '../services/user-service.js'
 
 export const signUp = () => {
 

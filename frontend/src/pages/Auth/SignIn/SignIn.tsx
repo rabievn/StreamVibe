@@ -6,7 +6,7 @@ import { Checkbox } from '../../../shared/ui/Checkbox/Checkbox'
 import { AuthLayout } from '../../../layouts/AuthLayout/AuthLayout'
 import { useNavigate } from 'react-router-dom'
 
-export const Login = () => {
+export const SignIn = () => {
   const { t } = useTranslation()
   const navigate = useNavigate()
 
