@@ -1,12 +1,12 @@
 import UserModel from '../models/user-model.js'
 import bcrypt from 'bcrypt'
 import * as uuid from 'uuid'
-import {MailService} from "./mail-service.js";
-import { TokenService } from './token-service.js'
+import {MailService} from './mail-service.js'
+import {TokenService} from './token-service.js'
 
 export class UserService {
-    static async signUp(email: string, password: string) {
-        const candidate = await UserModel.findById({email})
+    static async signUp(email, password) {
+        const candidate = await UserModel.findOne({email})
         if (candidate) {
             throw new Error(`User already exists with this ${email}`)
         }
@@ -18,9 +18,10 @@ export class UserService {
         await MailService.sendActivationMail(email, activationLink)
 
         const token = TokenService.generateTokens(user)
+        return token
     }
 
-    static getUserById = async (userId: string) => {
+    static async getUserById(userId) {
         const user = await UserModel.findById(userId)
 
         if (!user) return null
@@ -28,6 +29,4 @@ export class UserService {
         const {password, ...userData} = user.toObject()
         return userData
     }
-
 }
-

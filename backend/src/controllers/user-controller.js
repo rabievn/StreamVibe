@@ -1,8 +1,8 @@
-import {NextFunction, Request, Response} from 'express'
+import 'express'
 import {UserService} from '../services/user-service.js'
 
 export class UserController {
-    static async signUp(req: Request, res: Response, next: NextFunction) {
+    static async signUp(req, res, next) {
         try {
             res.json({message: 'Sign Up'})
         } catch (e) {
@@ -10,7 +10,7 @@ export class UserController {
         }
     }
 
-    static async signIn(req: Request, res: Response, next: NextFunction) {
+    static async signIn(req, res, next) {
         try {
             res.json({message: 'Sign In'})
         } catch (e) {
@@ -18,7 +18,7 @@ export class UserController {
         }
     }
 
-    static async getMe(req: Request, res: Response, next: NextFunction) {
+    static async getMe(req, res, next) {
         try {
             const userId = req.body.userId
 
@@ -39,7 +39,7 @@ export class UserController {
         }
     }
 
-    static async refresh(req: Request, res: Response, next: NextFunction) {
+    static async refresh(req, res, next) {
         try {
             res.json({message: 'Sign In'})
         } catch (e) {
@@ -47,7 +47,7 @@ export class UserController {
         }
     }
 
-    static async signOut(req: Request, res: Response, next: NextFunction) {
+    static async signOut(req, res, next) {
         try {
             res.json({message: 'Sign In'})
         } catch (e) {
