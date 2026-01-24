@@ -14,7 +14,7 @@ export class UserController {
 
     static async activate(req, res, next) {
         try {
-            const { link } = req.params
+            const {link} = req.params
             await UserService.activate(link)
             return res.redirect(process.env.CLIENT_URL)
         } catch (e) {
@@ -24,9 +24,17 @@ export class UserController {
 
     static async signIn(req, res, next) {
         try {
-            res.json({message: 'Sign In'})
+            const {email, password} = req.body
+            const userData = await UserService.signIn({email, password});
+
+            res.cookie('refreshToken', userData.refreshToken, {
+                maxAge: 30 * 24 * 60 * 60 * 1000,
+                httpOnly: true,
+            });
+
+            return res.json(userData);
         } catch (e) {
-            console.log(e)
+            next(e);
         }
     }
 

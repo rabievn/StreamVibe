@@ -42,8 +42,32 @@ export class UserService {
         }
     }
 
+    static async signIn({email, password, nickName}) {
+        const user = await UserModel.findOne({email})
+
+        if (!user) {
+            throw new Error('Пользователь с таким email не найден')
+        }
+        const isPassEquals = await bcrypt.compare(password, user.password)
+
+        if (!isPassEquals) {
+            throw new Error('Неверный пароль')
+        }
+
+        const userDto = {
+            id: user._id,
+            email: user.email,
+            nickName: user.nickName,
+            isActivated: user.isActivated,
+        }
+        const tokens = TokenService.generateTokens(userDto)
+        await TokenService.saveToken(userDto.id, tokens.refreshToken)
+
+        return { ...tokens, user: userDto }
+    }
+
     static async activate(activationLink) {
-        const user = await UserModel.findOne({ activationLink })
+        const user = await UserModel.findOne({activationLink})
         if (!user) {
             throw new Error('Invalid activation link')
         }
