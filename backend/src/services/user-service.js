@@ -5,28 +5,51 @@ import {MailService} from './mail-service.js'
 import {TokenService} from './token-service.js'
 
 export class UserService {
-    static async signUp(email, password) {
+    static async signUp({email, password, nickName}) {
         const candidate = await UserModel.findOne({email})
         if (candidate) {
-            throw new Error(`User already exists with this ${email}`)
+            throw new Error(`User already exists`)
         }
 
-        const hashPassword = await bcrypt.hash(password, 3)
+        const hashPassword = await bcrypt.hash(password, 10)
         const activationLink = uuid.v4()
-        const user = await UserModel.create({email, password: hashPassword, activationLink})
 
-        await MailService.sendActivationMail(email, activationLink)
+        const user = await UserModel.create({
+            email,
+            password: hashPassword,
+            nickName,
+            activationLink,
+        })
 
-        const token = TokenService.generateTokens(user)
-        return token
+        await MailService.sendActivationMail(
+            email,
+            `${process.env.API_URL}/api/activate/${activationLink}`
+        )
+
+        const userDto = {
+            id: user._id,
+            email: user.email,
+            nickName: user.nickName,
+            isActivated: user.isActivated,
+        }
+
+        const tokens = TokenService.generateTokens(userDto)
+        await TokenService.saveToken(userDto.id, tokens.refreshToken)
+
+        return {
+            ...tokens,
+            user: userDto,
+        }
     }
 
-    static async getUserById(userId) {
-        const user = await UserModel.findById(userId)
+    static async activate(activationLink) {
+        const user = await UserModel.findOne({ activationLink })
+        if (!user) {
+            throw new Error('Invalid activation link')
+        }
 
-        if (!user) return null
-
-        const {password, ...userData} = user.toObject()
-        return userData
+        user.isActivated = true
+        await user.save()
     }
+
 }

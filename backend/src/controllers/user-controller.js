@@ -4,9 +4,21 @@ import {UserService} from '../services/user-service.js'
 export class UserController {
     static async signUp(req, res, next) {
         try {
-            res.json({message: 'Sign Up'})
+            const {email, password, nickName} = req.body
+            const data = await UserService.signUp({email, password, nickName})
+            res.status(201).json(data)
         } catch (e) {
-            console.log(e)
+            next(e)
+        }
+    }
+
+    static async activate(req, res, next) {
+        try {
+            const { link } = req.params
+            await UserService.activate(link)
+            return res.redirect(process.env.CLIENT_URL)
+        } catch (e) {
+            next(e)
         }
     }
 

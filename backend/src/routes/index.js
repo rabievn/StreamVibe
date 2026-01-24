@@ -3,12 +3,14 @@ import {UserController} from "../controllers/user-controller.js";
 
 const router = Router();
 
-router.get('/signUp', UserController.signUp)
-router.get('/signIn', UserController.signIn)
+router.post('/signUp', UserController.signUp)
+router.post('/signIn', UserController.signIn)
 router.get('/me', UserController.getMe)
-router.get('/signOut', UserController.signOut)
+router.post('/signOut', UserController.signOut)
 // router.get('/activate/:link')
-router.get('/refresh', UserController.refresh)
+router.post('/refresh', UserController.refresh)
 // router.get('/users')
+router.get('/activate/:link', UserController.activate)
+
 
 export default router
