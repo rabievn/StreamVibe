@@ -1,5 +1,6 @@
 import express from 'express'
 import cors from 'cors'
+import cookieParser from 'cookie-parser'
 import router from './routes/index.js'
 import {errorMiddleware} from './middleware/error-middleware.js'
 
@@ -9,6 +10,7 @@ app.use(cors({
     origin: process.env.CLIENT_URL, credentials: true,
 }))
 app.use(express.json())
+app.use(cookieParser());
 
 app.use('/api', router)
 
@@ -20,7 +22,6 @@ app.use((req, res) => {
     res.status(404).json({message: 'Route not found'})
 })
 
-// ⬇️ ВСЕГДА ПОСЛЕДНИМ
 app.use(errorMiddleware)
 
 export default app

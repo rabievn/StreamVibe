@@ -36,4 +36,24 @@ export class TokenService {
 
     await tokenModel.deleteOne({ refreshToken })
   }
+
+  static async findToken(token) {
+    try {
+      const tokenData = await tokenModel.findOne({ refreshToken: token })
+      return tokenData
+    } catch (e) {
+      console.log('Error finding token:', e)
+      return null
+    }
+  }
+
+  static validateRefreshToken(token) {
+    try {
+      const userData = jwt.verify(token, config.jwtRefreshSecret)
+      return userData
+    } catch (e) {
+      console.log('Not valid refresh token:',e)
+      return null
+    }
+  }
 }
