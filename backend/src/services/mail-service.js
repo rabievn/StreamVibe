@@ -2,34 +2,35 @@ import nodemailer from 'nodemailer'
 import config from '../config/index.js'
 
 const createTransporter = () => {
-  if (!config.smtp?.user || !config.smtp?.password) {
-    return null
-  }
-  return nodemailer.createTransport({
-    host: config.smtp.host || 'smtp.gmail.com',
-    port: config.smtp.port || 587,
-    secure: false,
-    auth: {
-      user: config.smtp.user,
-      pass: config.smtp.password,
-    },
-  })
+    if (!config.smtp?.user || !config.smtp?.password) {
+        return null
+    }
+    return nodemailer.createTransport({
+        host: 'smtp.gmail.com',
+        port: 587,
+        secure: false, // ← ВАЖНО
+        auth: {
+            user: config.smtp.user,
+            pass: config.smtp.password,
+        },
+        tls: {
+            rejectUnauthorized: false,
+        },
+    });
 }
 
 export class MailService {
-  static async sendActivationMail(to, link) {
-    const transporter = createTransporter()
+    static async sendActivationMail(to, link) {
+        const transporter = createTransporter()
 
-    if (!transporter) {
-      console.warn('SMTP not configured (SMTP_USER/SMTP_PASSWORD). Activation link:', link)
-      return
-    }
+        if (!transporter) {
+            console.warn('SMTP not configured (SMTP_USER/SMTP_PASSWORD). Activation link:', link)
+            return
+        }
 
-    await transporter.sendMail({
-      from: config.smtp.user,
-      to,
-      subject: 'Activate your StreamVibe account',
-      html: `
+
+        await transporter.sendMail({
+            from: config.smtp.user, to, subject: 'Activate your StreamVibe account', html: `
         <div style="font-family: sans-serif; max-width: 480px; margin: 0 auto;">
           <h1>Email verification</h1>
           <p>Thanks for signing up. Click the link below to activate your account:</p>
@@ -40,6 +41,6 @@ export class MailService {
           <p style="color: #666; font-size: 12px;">If you didn't create an account, you can ignore this email.</p>
         </div>
       `,
-    })
-  }
+        })
+    }
 }

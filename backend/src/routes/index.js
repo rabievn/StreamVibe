@@ -1,6 +1,6 @@
-import { Router } from 'express'
-import { UserController } from '../controllers/user-controller.js'
-import { AuthController } from '../controllers/auth-controller.js'
+import {Router} from 'express'
+import {UserController} from '../controllers/user-controller.js'
+import {AuthController} from '../controllers/auth-controller.js'
 
 const router = Router()
 
@@ -11,5 +11,6 @@ router.post('/signOut', AuthController.signOut)
 router.post('/refresh', AuthController.refresh)
 router.get('/users', UserController.getUsers)
 router.get('/activate/:link', AuthController.activate)
+router.post('/resend-activation', AuthController.resendActivation)
 
 export default router

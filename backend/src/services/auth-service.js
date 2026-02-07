@@ -1,113 +1,134 @@
 import UserModel from '../models/user-model.js'
 import bcrypt from 'bcrypt'
 import * as uuid from 'uuid'
-import { MailService } from './mail-service.js'
-import { TokenService } from './token-service.js'
-import { ApiError } from '../exepctions/api-error.js'
+import {MailService} from './mail-service.js'
+import {TokenService} from './token-service.js'
+import {ApiError} from '../exepctions/api-error.js'
 
 export class AuthService {
-  static async signUp({ email, password, nickName }) {
-    const candidate = await UserModel.findOne({ email })
-    if (candidate) {
-      throw ApiError.BadRequest(`User already exists`)
+    static async signUp({email, password, nickName}) {
+        const candidate = await UserModel.findOne({email})
+        if (candidate) {
+            throw ApiError.BadRequest(`User already exists`)
+        }
+
+        const hashPassword = await bcrypt.hash(password, 10)
+        const activationLink = uuid.v4()
+
+        const user = await UserModel.create({
+            email, password: hashPassword, nickName, activationLink
+        })
+
+        await MailService.sendActivationMail(email, `${process.env.API_URL}/api/activate/${activationLink}`)
+
+        const userDto = {
+            id: user._id.toString(), email: user.email, nickName: user.nickName, isActivated: user.isActivated
+        }
+
+        const tokens = TokenService.generateTokens(userDto)
+        await TokenService.saveToken(userDto.id, tokens.refreshToken)
+
+        return {
+            ...tokens, user: userDto
+        }
     }
 
-    const hashPassword = await bcrypt.hash(password, 10)
-    const activationLink = uuid.v4()
+    static async signIn({email, password}) {
+        const user = await UserModel.findOne({email})
 
-    const user = await UserModel.create({
-      email, password: hashPassword, nickName, activationLink
-    })
+        if (!user) {
+            throw ApiError.BadRequest('Пользователь не найден')
+        }
 
-    await MailService.sendActivationMail(email, `${process.env.API_URL}/api/activate/${activationLink}`)
+        const isPassEquals = await bcrypt.compare(password, user.password)
 
-    const userDto = {
-      id: user._id.toString(), email: user.email, nickName: user.nickName, isActivated: user.isActivated
+        if (!isPassEquals) {
+            throw ApiError.Forbidden('Неверный пароль')
+        }
+        if (!user.isActivated) {
+            throw ApiError.Unauthorized('Аккаунт не активирован')
+        }
+
+        const userDto = {
+            id: user._id.toString(), email: user.email, nickName: user.nickName, isActivated: user.isActivated
+        }
+        const tokens = TokenService.generateTokens(userDto)
+        await TokenService.saveToken(userDto.id, tokens.refreshToken)
+
+        return {...tokens, user: userDto}
     }
 
-    const tokens = TokenService.generateTokens(userDto)
-    await TokenService.saveToken(userDto.id, tokens.refreshToken)
+    static async signOut(refreshToken) {
+        if (!refreshToken) {
+            return
+        }
 
-    return {
-      ...tokens, user: userDto
-    }
-  }
-
-  static async signIn({ email, password }) {
-    const user = await UserModel.findOne({ email })
-
-    if (!user) {
-      throw ApiError.BadRequest('Пользователь не найден')
+        await TokenService.removeToken(refreshToken)
     }
 
-    const isPassEquals = await bcrypt.compare(password, user.password)
+    static async activate(activationLink) {
+        const user = await UserModel.findOne({activationLink})
+        if (!user) {
+            throw ApiError.BadRequest('Invalid activation link')
+        }
 
-    if (!isPassEquals) {
-      throw ApiError.Forbidden('Неверный пароль')
-    }
-    if (!user.isActivated) {
-      throw ApiError.Unauthorized('Аккаунт не активирован')
-    }
-
-    const userDto = {
-      id: user._id.toString(), email: user.email, nickName: user.nickName, isActivated: user.isActivated
-    }
-    const tokens = TokenService.generateTokens(userDto)
-    await TokenService.saveToken(userDto.id, tokens.refreshToken)
-
-    return { ...tokens, user: userDto }
-  }
-
-  static async signOut(refreshToken) {
-    if (!refreshToken) {
-      return
+        user.isActivated = true
+        user.activationLink = null
+        await user.save()
     }
 
-    await TokenService.removeToken(refreshToken)
-  }
+    static async refresh(refreshToken) {
+        if (!refreshToken) {
+            throw ApiError.Unauthorized()
+        }
 
-  static async activate(activationLink) {
-    const user = await UserModel.findOne({ activationLink })
-    if (!user) {
-      throw ApiError.BadRequest('Invalid activation link')
+        const userData = TokenService.validateRefreshToken(refreshToken)
+
+        const tokenFromDb = await TokenService.findToken(refreshToken)
+
+        if (!userData || !tokenFromDb) {
+            throw ApiError.Unauthorized()
+        }
+
+        const user = await UserModel.findById(userData.id)
+
+        if (!user) {
+            throw ApiError.Unauthorized()
+        }
+
+        const userDto = {
+            id: user._id.toString(),
+            email: user.email,
+            nickName: user.nickName,
+            isActivated: user.isActivated,
+            role: user.role
+        }
+
+        const tokens = TokenService.generateTokens(userDto)
+
+        await TokenService.saveToken(userDto.id, tokens.refreshToken)
+
+        return {...tokens, user: userDto}
     }
 
-    user.isActivated = true
-    user.activationLink = null
-    await user.save()
-  }
+    static async resendActivation(email) {
+        const user = await UserModel.findOne({email})
 
-  static async refresh(refreshToken) {
-    if (!refreshToken) {
-      throw ApiError.Unauthorized()
+        if (!user) {
+            throw new Error('Пользователь не найден')
+        }
+
+        if (user.isActivated) {
+            throw new Error('Аккаунт уже активирован')
+        }
+
+        const activationLink = uuid.v4()
+        user.activationLink = activationLink
+
+        await user.save()
+
+        const link = `${process.env.API_URL}/api/activate/${activationLink}`
+
+        await MailService.sendActivationMail(email, link)
     }
-
-    const userData = TokenService.validateRefreshToken(refreshToken)
-
-    const tokenFromDb = await TokenService.findToken(refreshToken)
-
-    if (!userData || !tokenFromDb) {
-      throw ApiError.Unauthorized()
-    }
-
-    const user = await UserModel.findById(userData.id)
-
-    if (!user) {
-      throw ApiError.Unauthorized()
-    }
-
-    const userDto = {
-      id: user._id.toString(),
-      email: user.email,
-      nickName: user.nickName,
-      isActivated: user.isActivated,
-      role: user.role
-    }
-
-    const tokens = TokenService.generateTokens(userDto)
-
-    await TokenService.saveToken(userDto.id, tokens.refreshToken)
-
-    return { ...tokens, user: userDto }
-  }
 }
