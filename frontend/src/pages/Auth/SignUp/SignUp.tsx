@@ -1,10 +1,13 @@
+import { useNavigate } from 'react-router-dom'
+
+import { useTranslation } from 'react-i18next'
+
 import { AuthLayout } from '../../../layouts/AuthLayout/AuthLayout'
 import { Input } from '../../../shared/ui/Input/Input'
 import { Button } from '../../../shared/ui/Button/Button'
-import { useTranslation } from 'react-i18next'
-import styles from '../Auth.module.scss'
 import { Checkbox } from '../../../shared/ui/Checkbox/Checkbox'
-import { useNavigate } from 'react-router-dom'
+
+import styles from '../Auth.module.scss'
 
 export const SignUp = () => {
   const { t } = useTranslation()
