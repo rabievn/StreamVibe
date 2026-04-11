@@ -1,19 +1,25 @@
+import {Routing} from './router/Router'
+import {PersistGate} from 'redux-persist/integration/react'
+import {Provider} from 'react-redux'
+
+import {persistor, store} from './store/store'
+
+import {ThemeProvider} from "./providers/ThemeProvider";
+
 import './App.scss'
-import { Routing } from './router/Router'
-import { persistor, store } from './store/store'
-import { Provider } from 'react-redux'
-import { PersistGate } from 'redux-persist/integration/react'
 
 function App() {
-  return (
-    <div className="App">
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <Routing />
-        </PersistGate>
-      </Provider>
-    </div>
-  )
+    return (
+        <div className="App">
+            <ThemeProvider>
+                <Provider store={store}>
+                    <PersistGate loading={null} persistor={persistor}>
+                        <Routing/>
+                    </PersistGate>
+                </Provider>
+            </ThemeProvider>
+        </div>
+    )
 }
 
 export default App

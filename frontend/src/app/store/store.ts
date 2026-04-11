@@ -1,8 +1,9 @@
-// src/app/store/store.ts
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
-import storage from 'redux-persist/lib/storage'
-import { languageReducer } from '../../shared/model/languageSlice'
 import { persistReducer, persistStore } from 'redux-persist'
+
+import storage from 'redux-persist/lib/storage'
+
+import { languageReducer } from '../../shared/model/languageSlice'
 
 const rootReducer = combineReducers({
   language: languageReducer
@@ -11,7 +12,7 @@ const rootReducer = combineReducers({
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['language'] // какие редьюсеры сохранять
+  whitelist: ['language']
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
@@ -20,7 +21,7 @@ export const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: false // иначе persist может вызывать warning
+      serializableCheck: false
     })
 })
 
