@@ -1,14 +1,18 @@
+import { forwardRef, ComponentProps } from 'react'
 import styles from './Input.module.scss'
 
-type InputProps = {
-  placeholder?: string
-  type: 'text' | 'password' | 'email'
-}
+type InputProps = ComponentProps<'input'>
 
-export const Input: React.FC<InputProps> = ({ placeholder, type }) => {
+export const Input = forwardRef<HTMLInputElement, InputProps>(
+  ({ className, ...props }, ref) => {
+    return (
+      <input
+        ref={ref}
+        className={`${styles.input} ${className ?? ''}`}
+        {...props}
+      />
+    )
+  }
+)
 
-  return (
-    <input type={type} className={styles.input} placeholder={placeholder} />
-  )
-}
-
+Input.displayName = 'Input'

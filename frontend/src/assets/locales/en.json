@@ -35,5 +35,18 @@
   "play": "Play",
   "pause": "Pause",
   "next": "Next",
-  "previous": "Previous"
+  "previous": "Previous",
+  "validation": {
+    "required": "This field is required",
+    "emailRequired": "Email is required",
+    "emailInvalid": "Please enter a valid email address",
+    "usernameRequired": "Username is required",
+    "usernameInvalid": "Username is required",
+    "passwordRequired": "Password is required",
+    "passwordMinLength": "Password must be at least {{count}} characters",
+    "passwordMaxLength": "Password must be less than {{count}} characters",
+    "passwordWeak": "Password is too weak",
+    "confirmPasswordRequired": "Please confirm your password",
+    "passwordsNotMatch": "Passwords do not match"
+  }
 }

@@ -1,16 +1,23 @@
+import { FC, ReactNode, ComponentProps } from 'react'
 import styles from './Button.module.scss'
 
 type ButtonProps = {
   color: 'gray' | 'red'
-  children?: React.ReactNode
-  onClick: () => void
-}
+  children?: ReactNode
+} & ComponentProps<'button'>
 
-export const Button: React.FC<ButtonProps> = ({ children, color, onClick }) => {
+export const Button: FC<ButtonProps> = ({
+                                          children,
+                                          color,
+                                          className,
+                                          ...props
+                                        }) => {
   return (
-    <button onClick={onClick} className={`${styles.button} ${styles[`button--${color}`]}`}>
+    <button
+      {...props}
+      className={`${styles.button} ${styles[`button--${color}`]} ${className || ''}`}
+    >
       {children}
     </button>
   )
 }
-

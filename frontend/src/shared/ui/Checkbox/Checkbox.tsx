@@ -1,19 +1,25 @@
-import styles from './Checkbox.module.scss'
-import { useState } from 'react'
+import { forwardRef, ComponentProps } from 'react'
+
 import { CheckIcon } from '../../../assets/icons'
 
-export const Checkbox = () => {
-  const [checked, setChecked] = useState<boolean>(false)
+import styles from './Checkbox.module.scss'
 
-  return (
-    <label className={styles.checkbox}>
-      <input
-        type="checkbox"
-        checked={checked}
-        onChange={() => setChecked(!checked)}
-      />
-      {checked && <CheckIcon />}
-    </label>
-  )
-}
+type CheckboxProps = {
+  className?: string
+} & ComponentProps<'input'>
 
+export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
+  ({ className, checked, ...props }, ref) => {
+    return (
+      <label className={`${styles.checkbox} ${className || ''}`}>
+        <input
+          ref={ref}
+          type="checkbox"
+          checked={checked}
+          {...props}
+        />
+        {checked && <CheckIcon />}
+      </label>
+    )
+  }
+)

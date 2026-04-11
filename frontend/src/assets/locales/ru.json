@@ -35,5 +35,18 @@
   "play": "Воспроизвести",
   "pause": "Пауза",
   "next": "Следующее",
-  "previous": "Предыдущее"
+  "previous": "Предыдущее",
+  "validation": {
+    "required": "Обязательное поле",
+    "emailRequired": "Введите email",
+    "emailInvalid": "Введите корректный email",
+    "usernameRequired": "Введите имя пользователя",
+    "passwordRequired": "Введите пароль",
+    "passwordMinLength": "Пароль должен содержать минимум {{count}} символов",
+    "passwordMaxLength": "Пароль должен быть короче {{count}} символов",
+    "passwordWeak": "Слишком слабый пароль",
+    "confirmPasswordRequired": "Подтвердите пароль",
+    "passwordsNotMatch": "Пароли не совпадают",
+    "invalidCredentials": "Неверный email или пароль"
+  }
 }
