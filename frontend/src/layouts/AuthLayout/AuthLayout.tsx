@@ -2,7 +2,6 @@ import React from 'react'
 import { StreamVibeIcon } from '../../assets/icons'
 import { SchemeSwitcher } from '../../shared/ui/SchemeButton/SchemeSwitcher'
 import styles from './AuthLayout.module.scss'
-import { Images } from '../../assets'
 import { LanguageSwitcher } from '../../shared/ui/LanguageButton/LanguageSwitcher'
 
 
@@ -24,10 +23,7 @@ export const AuthLayout: React.FC<LoginLayoutProps> = ({ children }) => {
         </div>
         {children}
       </div>
-      <div className={styles.authBackground}>
-        <img src={Images.moviesCards} alt="Movies cards" />
-        <img src={Images.blackWave} alt="Movies cards" />
-      </div>
+      <div className={styles.authBackground} aria-hidden="true" />
     </div>
   )
 }

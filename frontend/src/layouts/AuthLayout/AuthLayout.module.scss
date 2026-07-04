@@ -30,6 +30,13 @@
   }
 
   .authBackground {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 20% 20%, rgba(229, 9, 20, 0.25), transparent 45%),
+      radial-gradient(circle at 80% 10%, rgba(120, 80, 255, 0.2), transparent 40%),
+      linear-gradient(180deg, #141414 0%, #0a0a0a 100%);
+
     &:before {
       content: '';
       position: absolute;
@@ -39,24 +46,6 @@
       width: 100%;
       height: 100%;
       z-index: 1;
-    }
-
-    img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-
-      &:first-child {
-        height: 860px;
-        opacity: 0.4;
-        margin-top: 50px;
-      }
-
-      &:last-child {
-        height: 860px;
-        opacity: 0.15;
-      }
     }
   }
 }

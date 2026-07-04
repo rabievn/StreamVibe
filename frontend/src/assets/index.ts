@@ -1,8 +1,13 @@
-import moviesCards from './images/SubContainer.png'
-import blackWave from './images/Image.png'
-import { CheckIcon, LangIcon, MoonIcon, NotificationIcon, SearchIcon, StreamVibeIcon, SunIcon } from './icons'
+import {
+  CheckIcon,
+  LangIcon,
+  MoonIcon,
+  NotificationIcon,
+  SearchIcon,
+  StreamVibeIcon,
+  SunIcon,
+} from './icons'
 
-// Группируем
 export const Icons = {
   StreamVibeIcon,
   SearchIcon,
@@ -10,10 +15,5 @@ export const Icons = {
   CheckIcon,
   MoonIcon,
   SunIcon,
-  LangIcon
-}
-
-export const Images = {
-  moviesCards,
-  blackWave
+  LangIcon,
 }
