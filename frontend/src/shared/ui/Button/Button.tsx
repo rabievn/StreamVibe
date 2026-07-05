@@ -6,12 +6,7 @@ type ButtonProps = {
   children?: ReactNode
 } & ComponentProps<'button'>
 
-export const Button: FC<ButtonProps> = ({
-                                          children,
-                                          color,
-                                          className,
-                                          ...props
-                                        }) => {
+export const Button: FC<ButtonProps> = ({ children, color, className, ...props }) => {
   return (
     <button
       {...props}

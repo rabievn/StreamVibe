@@ -1,16 +1,17 @@
 import React from 'react'
-import { StreamVibeIcon } from '../../assets/icons'
-import { SchemeSwitcher } from '../../shared/ui/SchemeButton/SchemeSwitcher'
-import styles from './AuthLayout.module.scss'
-import { LanguageSwitcher } from '../../shared/ui/LanguageButton/LanguageSwitcher'
 
+import { SchemeSwitcher } from '@/shared/ui/SchemeButton/SchemeSwitcher'
+import { LanguageSwitcher } from '@/features/language/switch-language/LanguageSwitcher'
+
+import { StreamVibeIcon } from '@/assets/icons'
+
+import styles from './AuthLayout.module.scss'
 
 type LoginLayoutProps = {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 export const AuthLayout: React.FC<LoginLayoutProps> = ({ children }) => {
-
   return (
     <div className={styles.auth}>
       <div className={styles.authContainer}>
@@ -27,6 +28,3 @@ export const AuthLayout: React.FC<LoginLayoutProps> = ({ children }) => {
     </div>
   )
 }
-
-
-
