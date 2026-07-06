@@ -1,6 +1,6 @@
 'use client'
 
-import { ThemeProvider } from '@/app/providers/ThemeProvider'
+import { ThemeProvider } from '@/shared/lib/theme'
 
 type ProvidersProps = {
   children: React.ReactNode

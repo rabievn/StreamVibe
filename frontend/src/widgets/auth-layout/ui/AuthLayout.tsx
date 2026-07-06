@@ -1,8 +1,7 @@
 import React from 'react'
 
-import { SchemeSwitcher } from '@/shared/ui/SchemeButton/SchemeSwitcher'
-import { LanguageSwitcher } from '@/features/language/switch-language/LanguageSwitcher'
-
+import { LanguageSwitcher } from '@/features/language/switch-language'
+import { ThemeSwitcher } from '@/features/theme/switch-theme'
 import { StreamVibeIcon } from '@/assets/icons'
 
 import styles from './AuthLayout.module.scss'
@@ -18,7 +17,7 @@ export const AuthLayout: React.FC<LoginLayoutProps> = ({ children }) => {
         <div className={styles.authHeader}>
           <StreamVibeIcon />
           <div className={styles.authHeaderSwitchers}>
-            <SchemeSwitcher />
+            <ThemeSwitcher />
             <LanguageSwitcher />
           </div>
         </div>

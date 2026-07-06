@@ -1,14 +1,15 @@
-import { useTheme } from '@/app/providers/ThemeProvider'
+'use client'
 
 import { MoonIcon, SunIcon } from '@/assets/icons'
+import { useTheme } from '@/shared/lib/theme'
 
-import styles from './SchemeSwitcher.module.scss'
+import styles from './ThemeSwitcher.module.scss'
 
-export const SchemeSwitcher = () => {
+export const ThemeSwitcher = () => {
   const { setMode, mode } = useTheme()
 
   return (
-    <div className={styles.schemeButton}>
+    <div className={styles.themeSwitcher}>
       <button
         className={`${mode === 'light' ? styles.active : ''}`}
         onClick={() => setMode('light')}
@@ -16,7 +17,10 @@ export const SchemeSwitcher = () => {
         <SunIcon />
       </button>
 
-      <button className={`${mode === 'dark' ? styles.active : ''}`} onClick={() => setMode('dark')}>
+      <button
+        className={`${mode === 'dark' ? styles.active : ''}`}
+        onClick={() => setMode('dark')}
+      >
         <MoonIcon />
       </button>
     </div>

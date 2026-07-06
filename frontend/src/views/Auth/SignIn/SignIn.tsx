@@ -7,7 +7,7 @@ import { useRouter } from '@/i18n/navigation'
 import { Input } from '@/shared/ui/Input/Input'
 import { Button } from '@/shared/ui/Button/Button'
 import { Checkbox } from '@/shared/ui/Checkbox/Checkbox'
-import { AuthLayout } from '@/layouts/AuthLayout/AuthLayout'
+import { AuthLayout } from '@/widgets/auth-layout'
 
 import styles from '../Auth.module.scss'
 

@@ -3,7 +3,7 @@
 import { useTranslations } from 'next-intl'
 
 import { useRouter } from '@/i18n/navigation'
-import { AuthLayout } from '@/layouts/AuthLayout/AuthLayout'
+import { AuthLayout } from '@/widgets/auth-layout'
 import { Input } from '@/shared/ui/Input/Input'
 import { Button } from '@/shared/ui/Button/Button'
 import { Checkbox } from '@/shared/ui/Checkbox/Checkbox'

@@ -1,11 +1,10 @@
-@use '../styles/main';
+@use '../../styles/main';
 
 html,
 body {
   min-height: 100%;
   font-family: var(--font-family-primary), sans-serif;
 }
-
 
 body {
   height: 100vh;

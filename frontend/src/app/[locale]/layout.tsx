@@ -3,11 +3,11 @@ import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, setRequestLocale } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 
-import { manrope } from '@/app/fonts'
-import { Providers } from '@/app/providers'
+import { manrope } from '@/_app/fonts'
+import { Providers } from '@/_app/providers'
 import { routing, type Locale } from '@/i18n/routing'
 
-import '../globals.scss'
+import '@/_app/styles/globals.scss'
 
 export const metadata: Metadata = {
   title: 'StreamVibe',
@@ -35,12 +35,14 @@ export default async function LocaleLayout({
     notFound()
   }
 
-  setRequestLocale(locale)
+  const currentLocale = locale as Locale
+
+  setRequestLocale(currentLocale)
   const messages = await getMessages()
 
   return (
     <html
-      lang={locale}
+      lang={currentLocale}
       className={`dark ${manrope.variable}`}
       suppressHydrationWarning
     >
